@@ -1,0 +1,28 @@
+/* Fondo general de la aplicación */
+body {
+    background-color: #4CAF50; /* Verde billar claro */
+    color: #ffffff; /* Texto en color blanco */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Contenedor principal de la aplicación */
+  .app-container {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Encabezados */
+  h1, h2 {
+    margin-bottom: 20px;
+    font-size: 2em;
+  }
+  

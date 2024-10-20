@@ -1,0 +1,17 @@
+/* Contenedor de la vista principal (Home) */
+.home-container {
+  background-color: rgba(0, 0, 0, 0.3); /* Fondo oscuro semitransparente */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Estilo del input de nombre */
+input {
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}

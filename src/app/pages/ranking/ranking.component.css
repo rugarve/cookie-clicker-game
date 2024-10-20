@@ -1,0 +1,39 @@
+/* Contenedor de la vista del ranking */
+.ranking-container {
+    background-color: rgba(0, 0, 0, 0.3); /* Fondo oscuro semitransparente */
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  /* Estilos para las tablas */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    padding: 10px;
+    border: 1px solid #ffffff;
+  }
+  
+  th {
+    background-color: #333;
+    color: white;
+  }
+  
+  td {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+  }
+  
+  /* Estilo del botón de regreso */
+  .back-btn {
+    background-color: #ffc107; /* Amarillo para el botón de volver */
+    color: black;
+    margin-top: 20px;
+  }
+  
+  .back-btn:hover:enabled {
+    background-color: #e0a800;
+  }

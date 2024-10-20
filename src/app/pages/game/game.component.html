@@ -1,0 +1,26 @@
+<div class="game-container">
+  <h1>Welcome, {{ username }}!</h1>
+  <p aria-live="polite">Points: {{ points }}</p>
+
+  <app-button 
+    [text]="'Generate Points'"
+    [styleClass]="'click-btn'"
+    (buttonClick)="addPoint()">
+  </app-button>
+
+  <div *ngIf="points >= 50">
+    <app-button 
+      [text]="'Buy AutoClicker (Cost: ' + autoClickerCost + ')'"
+      [disabled]="points < autoClickerCost"
+      [styleClass]="'auto-clicker-btn'"
+      (buttonClick)="buyAutoClicker()">
+    </app-button>
+    <p>You own {{ autoClickers }} AutoClickers</p>
+  </div>
+
+  <app-button 
+    [text]="'Exit Game'"
+    [styleClass]="'exit-btn'"
+    (buttonClick)="exitGame()">
+  </app-button>
+</div>

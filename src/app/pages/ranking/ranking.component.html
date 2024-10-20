@@ -1,0 +1,22 @@
+<div class="ranking-container">
+    <h1>Player Ranking</h1>
+    <table aria-label="Player Ranking Table">
+      <thead>
+        <tr>
+          <th scope="col">Rank</th>
+          <th scope="col">Player</th>
+          <th scope="col">Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Se asegura que cada fila sea generada dentro del <tbody> -->
+        <app-row
+          *ngFor="let player of ranking; let i = index"
+          [rank]="i + 1"
+          [username]="player.username"
+          [score]="player.score">
+        </app-row>
+      </tbody>
+    </table>
+    <button routerLink="/game" class="back-btn">Back to Game</button>
+  </div>

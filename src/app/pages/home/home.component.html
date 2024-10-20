@@ -1,0 +1,15 @@
+<div class="home-container">
+  <h1>Welcome to the Game!</h1>
+  <input
+    type="text"
+    placeholder="Enter your name"
+    [(ngModel)]="username"
+    class="name-input"
+  />
+  <app-button 
+    [text]="'Start Game'"
+    [disabled]="!username.trim()"
+    [styleClass]="'start-btn'"
+    (buttonClick)="startGame()">
+  </app-button>
+</div>
