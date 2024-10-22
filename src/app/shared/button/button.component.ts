@@ -6,12 +6,12 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./button.component.css']
 })
 export class ButtonComponent {
-  @Input() text: string = 'Button';  // Texto del botón
-  @Input() disabled: boolean = false;  // Habilitar o deshabilitar el botón
-  @Input() type: 'button' | 'submit' = 'button';  // Tipo de botón (por defecto 'button')
-  @Input() styleClass: string = '';  // Clases de estilo adicionales para personalización
+  @Input() text: string = 'Button';
+  @Input() disabled: boolean = false;
+  @Input() type: 'button' | 'submit' = 'button';
+  @Input() styleClass: string = '';
 
-  @Output() buttonClick = new EventEmitter<void>();  // Evento que emite al hacer clic
+  @Output() buttonClick = new EventEmitter<void>();
 
   onClick() {
     if (!this.disabled) {

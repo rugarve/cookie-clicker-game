@@ -1,30 +1,21 @@
-/* Estilos generales para botones */
 button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff; /* Azul fuerte para botones habilitados */
-    color: white; /* Texto blanco en botones */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  /* Cambia el color del botón al hacer hover */
-  button:hover:enabled {
-    background-color: #0056b3; /* Un azul más oscuro al pasar el mouse */
-  }
-  
-  /* Estilos cuando el botón está enfocado */
-  button:focus {
-    outline: 2px solid #ffffff; /* Un borde blanco cuando está enfocado */
-    outline-offset: 2px;
-  }
-  
-  /* Estilos para botones deshabilitados */
-  button:disabled {
-    background-color: #6c757d; /* Gris oscuro para botones deshabilitados */
-    color: #dcdcdc; /* Texto más claro en botones deshabilitados */
-    cursor: not-allowed;
-    opacity: 0.7;
-  }
+  font-family: 'Verdana', sans-serif;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+  background-color: #3D7E9A; /* Botón habilitado */
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #28647A;
+}
+
+button:disabled {
+  background-color: #BDC3C7; /* Botón deshabilitado */
+  color: #7F8C8D;
+  cursor: not-allowed;
+}

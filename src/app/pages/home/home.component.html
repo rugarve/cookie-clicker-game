@@ -1,15 +1,24 @@
 <div class="home-container">
-  <h1>Welcome to the Game!</h1>
+  <h1>Bienvenido al juego!</h1>
   <input
     type="text"
-    placeholder="Enter your name"
+    placeholder="Introduzca su nombre"
     [(ngModel)]="username"
     class="name-input"
   />
+  
   <app-button 
-    [text]="'Start Game'"
+    [text]="'Comienza el juego'"
     [disabled]="!username.trim()"
     [styleClass]="'start-btn'"
     (buttonClick)="startGame()">
+  </app-button>
+
+  <app-button 
+    *ngIf="hasPlayers"
+    [text]="'Ranking'"
+    [disabled]="!hasPlayers"
+    [styleClass]="'ranking-btn'"
+    (buttonClick)="showRanking()">
   </app-button>
 </div>

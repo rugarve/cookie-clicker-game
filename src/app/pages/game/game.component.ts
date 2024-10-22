@@ -12,7 +12,7 @@ export class GameComponent implements OnInit, OnDestroy {
   username: string = '';
   points: number = 0;
   autoClickers: number = 0;
-  autoClickerCost: number = 50; // El primer autoClicker cuesta 50
+  autoClickerCost: number = 50;
   autoclikersStop: number = 0;
   interval: any;
   autoClickersRunning: number = 0;
@@ -26,62 +26,55 @@ export class GameComponent implements OnInit, OnDestroy {
     if (savedState) {
       this.points = savedState.points;
       this.autoClickers = savedState.autoClickers;
-      this.updateAutoClickerCost(); // Asegurarnos de que el costo se actualice correctamente
+      this.updateAutoClickerCost();
     }
   }
 
-  // Actualiza el costo de los auto-clickers
   updateAutoClickerCost() {
-    this.autoClickerCost = 50 * (this.autoClickers + 1); // El costo aumenta en múltiplos de 50 con cada compra
+    this.autoClickerCost = 50 * (this.autoClickers + 1);
   }
 
-  // Añadir un punto manualmente al hacer clic en el botón
   addPoint() {
     this.points++;
     this.gameService.updatePoints(this.username, this.points);
   }
 
-  // Comprar un auto-clicker
   buyAutoClicker() {
     if (this.points >= this.autoClickerCost && this.autoClickersRunning === 0) {
-      this.points -= this.autoClickerCost; // Restamos el costo del auto-clicker
+      this.points -= this.autoClickerCost;
       this.autoclikersStop = this.autoClickerCost;
       this.autoClickers++;
-      this.updateAutoClickerCost(); // Actualizamos el costo para el siguiente auto-clicker
+      this.updateAutoClickerCost();
       this.gameService.updatePoints(this.username, this.points);
       this.gameService.updateAutoClickers(this.username, this.autoClickers);
 
-      // Solo permite ejecutar el intervalo una vez por compra
       this.autoClickersRunning = this.autoClickers;
-      this.startAutoClickerPoints(this.autoclikersStop); // Genera puntos hasta que alcance el coste del auto-clicker
+      this.startAutoClickerPoints(this.autoclikersStop);
     }
   }
 
-  // Función para generar puntos por auto-clickers, y detener cuando se alcanza el costo del auto-clicker
   startAutoClickerPoints(autoClickerStop: number) {
-    let pointsGenerated = 0; // Contador para puntos generados por este grupo de auto-clickers
-    const pointsPerClicker = this.autoClickers; // 1 punto por auto-clicker por ciclo
+    let pointsGenerated = 0;
+    const pointsPerClicker = this.autoClickers;
 
     this.interval = setInterval(() => {
-      this.points += pointsPerClicker; // Genera puntos en función del número de auto-clickers comprados
+      this.points += pointsPerClicker;
       this.gameService.updatePoints(this.username, this.points);
       pointsGenerated += pointsPerClicker;
 
-      // Verificar si hemos generado puntos suficientes para el costo del auto-clicker
-      if (pointsGenerated >= autoClickerStop) { // Genera hasta que alcance el coste del auto-clicker
-        clearInterval(this.interval); // Detenemos el intervalo
-        this.autoClickersRunning = 0; // Restablecemos para permitir más compras
+      if (pointsGenerated >= autoClickerStop) {
+        clearInterval(this.interval);
+        this.autoClickersRunning = 0;
       }
-    }, 100); // Intervalo de 100ms para generar puntos
+    }, 100);
   }
 
-  // Detener los auto-clickers al salir del juego
   exitGame() {
-    clearInterval(this.interval); // Detenemos el intervalo cuando el jugador sale del juego
+    clearInterval(this.interval);
     this.router.navigate(['/']);
   }
 
   ngOnDestroy() {
-    clearInterval(this.interval); // Asegurarse de limpiar el intervalo al destruir el componente
+    clearInterval(this.interval);
   }
 }

@@ -1,26 +1,15 @@
-import type { Config } from 'jest';
-
-const config: Config = {
+module.exports = {
   preset: 'jest-preset-angular',
-  setupFilesAfterEnv: [__dirname + '/setup-jest.ts'], // Usar la ruta absoluta con __dirname
+  setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   testEnvironment: 'jsdom',
+  transform: {
+    '^.+\\.(ts|js|html)$': 'ts-jest',
+  },
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
       stringifyContentPathRegex: '\\.html$',
     },
   },
-  transform: {
-    '^.+\\.(ts|html)$': 'ts-jest',
-  },
-  moduleNameMapper: {
-    'src/(.*)': '<rootDir>/src/$1',
-  },
   moduleFileExtensions: ['ts', 'html', 'js', 'json'],
-  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
-  collectCoverage: true,
-  coverageReporters: ['html', 'text-summary'],
-  coverageDirectory: '<rootDir>/coverage/',
 };
-
-export default config;

@@ -8,11 +8,15 @@ describe('GameService', () => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(GameService);
 
-    // Mock de localStorage para que no interfiera con el entorno de pruebas
     jest.spyOn(Storage.prototype, 'setItem');
-    jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(JSON.stringify({
-      Player1: { points: 100, autoClickers: 2 }
-    }));
+    jest.spyOn(Storage.prototype, 'getItem').mockImplementation((key) => {
+      if (key === 'playersState') {
+        return JSON.stringify({
+          Player1: { points: 100, autoClickers: 2 }
+        });
+      }
+      return null;
+    });
   });
 
   afterEach(() => {

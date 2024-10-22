@@ -1,17 +1,39 @@
-/* Contenedor de la vista principal (Home) */
 .home-container {
-  background-color: rgba(0, 0, 0, 0.3); /* Fondo oscuro semitransparente */
-  padding: 20px;
-  border-radius: 10px;
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  padding: 40px;
+  margin: 20px auto;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  text-align: center;
 }
 
-/* Estilo del input de nombre */
-input {
-  padding: 10px;
-  font-size: 16px;
-  margin-bottom: 20px;
-  border: none;
-  border-radius: 5px;
+.name-input {
+  font-size: 1.2rem;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #D3D3D3;
   width: 100%;
+  max-width: 400px;
   box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.name-input:focus {
+  border-color: #3D7E9A;
+  outline: none;
+}
+
+.start-btn, .ranking-btn {
+  width: 80%;
+  max-width: 300px;
+  padding: 15px;
+}
+
+.ranking-btn {
+  margin-top: 20px;
+}
+
+.start-btn:disabled, .ranking-btn:disabled {
+  background-color: #BDC3C7;
 }

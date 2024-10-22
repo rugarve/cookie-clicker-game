@@ -1,16 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RowComponent } from './row.component';
-import { By } from '@angular/platform-browser';
 
 describe('RowComponent', () => {
   let component: RowComponent;
   let fixture: ComponentFixture<RowComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       declarations: [RowComponent]
-    }).compileComponents();
+    })
+      .overrideComponent(RowComponent, {
+        set: {
+          templateUrl: undefined,
+          styleUrls: []
+        }
+      })
+      .compileComponents();
+  }));
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(RowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

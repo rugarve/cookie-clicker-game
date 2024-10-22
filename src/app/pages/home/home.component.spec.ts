@@ -1,9 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -11,18 +12,26 @@ describe('HomeComponent', () => {
   let userService: UserService;
   let router: Router;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       declarations: [HomeComponent],
-      imports: [FormsModule, RouterTestingModule],
+      imports: [FormsModule, RouterTestingModule, NoopAnimationsModule],
       providers: [UserService],
-    }).compileComponents();
+    })
+      .overrideComponent(HomeComponent, {
+        set: {
+          templateUrl: undefined,
+          styleUrls: []
+        }
+      })
+      .compileComponents();
+  }));
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     userService = TestBed.inject(UserService);
     router = TestBed.inject(Router);
-
     fixture.detectChanges();
   });
 
@@ -47,5 +56,12 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
     button.click();
     expect(spy).toHaveBeenCalled();
+  });
+
+  it('should navigate to /game after startGame is called', () => {
+    const routerSpy = jest.spyOn(router, 'navigate');
+    component.username = 'Player1';
+    component.startGame();
+    expect(routerSpy).toHaveBeenCalledWith(['/game']);
   });
 });

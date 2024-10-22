@@ -8,7 +8,6 @@ describe('UserService', () => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(UserService);
 
-    // Mock de localStorage
     jest.spyOn(Storage.prototype, 'setItem');
     jest.spyOn(Storage.prototype, 'getItem').mockImplementation((key) => {
       if (key === 'username') return 'Player1';

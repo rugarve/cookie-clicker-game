@@ -1,9 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RankingComponent } from './ranking.component';
-import { UserService } from 'src/app/services/user/user.service';
+import { UserService } from '../../services/user/user.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('RankingComponent', () => {
   let component: RankingComponent;
@@ -17,22 +18,31 @@ describe('RankingComponent', () => {
     { username: 'Player3', score: 100 },
   ];
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(() => {
     const userServiceMock = {
       getRanking: jest.fn().mockReturnValue(mockRanking),
     };
 
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       declarations: [RankingComponent],
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, NoopAnimationsModule],
       providers: [{ provide: UserService, useValue: userServiceMock }],
-    }).compileComponents();
+    })
+      .overrideComponent(RankingComponent, {
+        set: {
+          templateUrl: undefined,
+          styleUrls: []
+        }
+      })
+      .compileComponents();
+  }));
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(RankingComponent);
     component = fixture.componentInstance;
     userService = TestBed.inject(UserService);
     getRankingSpy = jest.spyOn(userService, 'getRanking');
-    fixture.detectChanges(); // Ejecutamos ngOnInit
+    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -47,7 +57,6 @@ describe('RankingComponent', () => {
     const rows = fixture.debugElement.queryAll(By.css('tbody tr'));
     expect(rows.length).toBe(3);
 
-    // Verificamos que los jugadores están ordenados correctamente por puntaje
     expect(rows[0].nativeElement.textContent).toContain('Player1');
     expect(rows[1].nativeElement.textContent).toContain('Player2');
     expect(rows[2].nativeElement.textContent).toContain('Player3');
@@ -62,11 +71,11 @@ describe('RankingComponent', () => {
   });
 
   it('should navigate back to the game when the back button is clicked', () => {
-    const router = TestBed.inject(Router); // Inyectamos el Router
-    const routerSpy = jest.spyOn(router, 'navigate'); // Espiamos el método navigate del Router
+    const router = TestBed.inject(Router);
+    const routerSpy = jest.spyOn(router, 'navigate');
     const backButton = fixture.debugElement.query(By.css('.back-btn'));
 
     backButton.nativeElement.click();
-    expect(routerSpy).toHaveBeenCalledWith(['/game']); // Verificamos que navega a la ruta "/game"
+    expect(routerSpy).toHaveBeenCalledWith(['/game']);
   });
 });

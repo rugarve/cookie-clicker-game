@@ -42,8 +42,13 @@ export class UserService {
       return Object.keys(players).map(username => ({
         username,
         score: players[username].points
-      })).sort((a, b) => b.score - a.score); // Ordena el ranking por puntos
+      })).sort((a, b) => b.score - a.score);
     }
     return [];
+  }
+
+  getPlayers(): any[] {
+    const players = localStorage.getItem('playersState');
+    return players ? JSON.parse(players) : [];
   }
 }

@@ -26,7 +26,7 @@
               "src/styles.css"
             ],
             "scripts": [],
-            "baseHref": "/cookie-clicker-game/"
+            "baseHref": "/"
           },
           "configurations": {
             "production": {
@@ -59,7 +59,7 @@
               "namedChunks": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
